@@ -1,11 +1,12 @@
 import React from "react";
-import error from "../../assets/App-Error.png";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
-const Error = () => {
+import pageerror from "../../assets/error-404.png";
+
+const PageError = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
-      <img src={error} alt="Error" className="w-full max-w-md mb-6" />
+    <div className="flex flex-col items-center justify-center min-h-screen text-center px-4 py-8">
+      <img src={pageerror} alt="PageError" className="w-full max-w-md mb-6" />
 
       <h2 className="text-2xl font-bold mb-2">Page Not Found</h2>
       <p className="text-gray-500 mb-4">
@@ -22,4 +23,4 @@ const Error = () => {
   );
 };
 
-export default Error;
+export default PageError;

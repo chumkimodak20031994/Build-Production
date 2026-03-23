@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaStar, FaDownload } from "react-icons/fa";
 import { toast } from "react-toastify";
+import PageError from "../../error/PageError";
 
 const AppDetails = ({ apps }) => {
   const { id } = useParams();
@@ -10,13 +11,13 @@ const AppDetails = ({ apps }) => {
   const app = apps.find((item) => item.id === Number(id));
 
   if (!app) {
-    return <h2 className="text-center mt-10">App not found</h2>;
+    return <PageError />;
   }
 
   const handleInstall = () => {
     setInstalled(true);
 
-    toast.success(`${app.title} Installed Successfully 🎉`);
+    toast.success(`${app.title} Installed Successfully`);
   };
   return (
     <div className="max-w-6xl mx-auto px-4 my-10">

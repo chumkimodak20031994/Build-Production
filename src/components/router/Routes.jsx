@@ -22,12 +22,13 @@ export const router = createBrowserRouter([
         path: "/apps",
         element: <AllApps apps={appsData} />,
       },
+
       {
         path: "/apps/:id",
         element: <AppDetails apps={appsData} />,
       },
       {
-        path: "*", // ✅ catch all routes
+        path: "*",
         element: <Error />,
       },
     ],
