@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FaDownload, FaSearch, FaStar } from "react-icons/fa";
+import { FaCross, FaDownload, FaSearch, FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 const AllApps = ({ apps }) => {
   const [search, setSearch] = useState("");
@@ -8,6 +9,7 @@ const AllApps = ({ apps }) => {
   const filteredApps = apps.filter((app) =>
     app.title.toLowerCase().includes(search.toLowerCase()),
   );
+  const navigate = useNavigate();
 
   return (
     <div className="max-w-6xl mx-auto px-4 my-10">
@@ -40,37 +42,47 @@ const AllApps = ({ apps }) => {
           />
         </div>
       </div>
+      {filteredApps.length > 0 ? (
+        <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {filteredApps.map((app) => (
+              <div
+                key={app.id}
+                onClick={() => navigate(`/apps/${app.id}`)}
+                className="bg-white rounded-lg shadow hover:shadow-lg transition p-3 cursor-pointer hover:scale-105 duration-200"
+              >
+                <img
+                  src={app.image}
+                  alt={app.title}
+                  className="w-full h-32 object-cover rounded bg-gray-200"
+                />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredApps.map((app) => (
-          <div
-            key={app.id}
-            className="bg-white rounded-lg shadow hover:shadow-lg transition p-3 cursor-pointer hover:scale-105 duration-200"
-          >
-            <img
-              src={app.image}
-              alt={app.title}
-              className="w-full h-32 object-cover rounded bg-gray-200"
-            />
+                <h3 className="text-sm font-semibold mt-2">{app.title}</h3>
 
-            <h3 className="text-sm font-semibold mt-2">{app.title}</h3>
+                <div className="flex justify-between items-center mt-2 text-xs">
+                  <span className="text-green-500 font-medium flex items-center gap-2 btn bg-green-100">
+                    <small>
+                      <FaDownload />
+                    </small>
+                    {app.downloads}
+                  </span>
 
-            <div className="flex justify-between items-center mt-2 text-xs">
-              <span className="text-green-500 font-medium flex items-center gap-2 btn bg-green-100">
-                <small>
-                  <FaDownload />
-                </small>
-                {app.downloads}
-              </span>
-
-              <span className="flex items-center gap-1 text-orange-500 btn bg-amber-100">
-                <FaStar />
-                {app.ratingAvg}
-              </span>
-            </div>
+                  <span className="flex items-center gap-1 text-orange-500 btn bg-amber-100">
+                    <FaStar />
+                    {app.ratingAvg}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div className="flex justify-center items-center h-40">
+          <p className="text-gray-500 text-lg font-medium flex gap-2">
+            <FaCross className="text-3xl text-red-600" /> No Apps Found
+          </p>
+        </div>
+      )}
     </div>
   );
 };

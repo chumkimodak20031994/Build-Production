@@ -5,11 +5,13 @@ import Home from "../pages/Home";
 import AllApps from "../pages/apps/AllApps";
 import AppDetails from "../pages/apps/AppDetails";
 import appsData from "../../../public/apps.json";
+import Error from "../error/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -23,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/apps/:id",
         element: <AppDetails apps={appsData} />,
+      },
+      {
+        path: "*", // ✅ catch all routes
+        element: <Error />,
       },
     ],
   },

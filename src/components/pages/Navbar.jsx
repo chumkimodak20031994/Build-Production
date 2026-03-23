@@ -1,9 +1,10 @@
 import React from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import hero from "../../assets/logo.png";
 import { FaGithub } from "react-icons/fa6";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const links = (
     <>
       <ul className="flex gap-6">
@@ -83,7 +84,13 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="flex gap-x-2 items-center">
-            <img width={50} height={50} src={hero} alt="hero" />
+            <img
+              onClick={() => "/"}
+              width={50}
+              height={50}
+              src={hero}
+              alt="hero"
+            />
             <a className=" text-xl text-purple-600 font-bold">HERO.IO</a>
           </div>
         </div>
