@@ -3,6 +3,8 @@ import Root from "./Root";
 import { Children } from "react";
 import Home from "../pages/Home";
 import AllApps from "../pages/apps/AllApps";
+import AppDetails from "../pages/apps/AppDetails";
+import appsData from "../../../public/apps.json";
 
 export const router = createBrowserRouter([
   {
@@ -12,11 +14,15 @@ export const router = createBrowserRouter([
       {
         index: true,
         path: "/",
-        Component: Home,
+        element: <Home />,
       },
       {
         path: "/apps",
-        Component: AllApps,
+        element: <AllApps apps={appsData} />,
+      },
+      {
+        path: "/apps/:id",
+        element: <AppDetails apps={appsData} />,
       },
     ],
   },
