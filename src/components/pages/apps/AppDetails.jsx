@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaStar, FaDownload } from "react-icons/fa";
-import { toast } from "react-toastify";
 import PageError from "../../error/PageError";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import { FaRev } from "react-icons/fa6";
+import { GrLike } from "react-icons/gr";
 
 const AppDetails = ({ apps }) => {
   const { id } = useParams();
@@ -13,19 +16,46 @@ const AppDetails = ({ apps }) => {
   if (!app) {
     return <PageError />;
   }
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("installed_apps")) || [];
 
+    setInstalled(stored.some((item) => item.id === Number(id)));
+  }, [id]);
   const handleInstall = () => {
+    const stored = JSON.parse(localStorage.getItem("installed_apps")) || [];
+
+    const exists = stored.find((item) => item.id === app.id);
+
+    if (exists) {
+      Swal.fire({
+        icon: "info",
+        title: "Already Installed",
+        text: "This app is already installed ",
+      });
+      return;
+    }
+
+    const updated = [...stored, app];
+    localStorage.setItem("installed_apps", JSON.stringify(updated));
+
     setInstalled(true);
 
-    toast.success(`${app.title} Installed Successfully`);
+    Swal.fire({
+      icon: "success",
+      title: "Installed!",
+      text: `${app.title} installed successfully `,
+      timer: 2000,
+      showConfirmButton: false,
+    });
   };
+
   return (
-    <div className="max-w-6xl mx-auto px-4 my-10">
-      <div className="flex flex-col md:flex-row gap-6 items-center md:items-start border p-6 rounded-lg">
+    <div className="max-w-7xl mx-auto px-4 my-10">
+      <div className="flex flex-col md:flex-row gap-6 items-center md:items-start  p-6 rounded-lg">
         <img
           src={app.image}
           alt={app.title}
-          className="w-40 h-40 object-cover rounded"
+          className="w-50 h-60 object-cover rounded bg-gray-100"
         />
 
         <div className="flex-1">
@@ -34,15 +64,29 @@ const AppDetails = ({ apps }) => {
             Developed by{" "}
             <span className="text-purple-600">{app.companyName}</span>
           </p>
-
+          <div className="border border-gray-200 rounded-2xl my-4"></div>
           <div className="flex gap-6 mt-4 text-sm">
-            <div className="flex items-center gap-2 text-green-600">
-              <FaDownload /> {app.downloads}
+            <div className="flex flex-col items-start gap-1 ">
+              <span>
+                <FaDownload className="text-green-600" />
+              </span>
+              <p className="text-gray-400 text-sm">Downloads</p>
+              <p className="text-3xl font bold">{app.downloads}</p>
             </div>
-            <div className="flex items-center gap-2 text-orange-500">
-              <FaStar /> {app.ratingAvg}
+            <div className="flex flex-col items-start gap-1 ">
+              <span>
+                <FaStar className="text-orange-500" />
+              </span>
+              <p className="text-gray-400 text-sm">Average Ratings</p>
+              <p className="text-3xl font bold"> {app.ratingAvg}</p>
             </div>
-            <div>{app.reviews} Reviews</div>
+            <div className="flex flex-col items-start gap-1 ">
+              <span>
+                <GrLike className="text-purple-600" />
+              </span>
+              <p className="text-sm text text-gray-400">Total Reviews</p>
+              <p className="text-3xl font bold">{app.reviews} </p>
+            </div>
           </div>
 
           <button

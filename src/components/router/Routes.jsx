@@ -6,6 +6,7 @@ import AllApps from "../pages/apps/AllApps";
 import AppDetails from "../pages/apps/AppDetails";
 import appsData from "../../../public/apps.json";
 import Error from "../error/Error";
+import MyInstallation from "../pages/MyInstallation";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/apps/:id",
         element: <AppDetails apps={appsData} />,
+      },
+      {
+        path: "/readlist",
+        element: <MyInstallation />,
       },
       {
         path: "*",
