@@ -79,32 +79,38 @@ const MyInstallation = () => {
       {apps.length === 0 ? (
         <PageError />
       ) : (
-        <div className=" max-w-7xl mx-auto px-4 my-10">
+        <div className=" max-w-7xl mx-auto my-10">
           {sortedApps.map((app) => (
             <div
               key={app.id}
               className="flex items-center justify-between p-4 hover:bg-gray-50 transition bg-white shadow-xl my-4  rounded-lg"
             >
               {/* LEFT SIDE */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+                {/* Image */}
                 <img
                   src={app.image}
                   alt={app.title}
-                  className="w-14 h-14 rounded object-cover bg-gray-200"
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded object-cover bg-gray-200"
                 />
 
-                <div>
-                  <h3 className="font-semibold">{app.title}</h3>
+                {/* Content */}
+                <div className="flex-1">
+                  <h3 className="font-semibold text-sm sm:text-base">
+                    {app.title}
+                  </h3>
 
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mt-1 justify-center">
-                    <span className="text-green-600 flex gap-2 text-center">
-                      <FaDownload className="text-green-600" /> {app.downloads}
+                  {/* Stats */}
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500 mt-1">
+                    <span className="flex items-center gap-1 text-green-600">
+                      <FaDownload /> {app.downloads}
                     </span>
-                    <span className="text-orange-500 flex gap-2 text-center">
-                      <FaStar className="text-orange-500" />{" "}
-                      {app.ratingAvg || 5}
+
+                    <span className="flex items-center gap-1 text-orange-500">
+                      <FaStar /> {app.ratingAvg || 5}
                     </span>
-                    <span>{app.size} MB</span>
+
+                    <span className="text-gray-500">{app.size} MB</span>
                   </div>
                 </div>
               </div>

@@ -78,19 +78,15 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-60 p-2 shadow"
             >
               {links}
             </ul>
           </div>
           <div className="flex gap-x-2 items-center">
-            <img
-              onClick={() => "/"}
-              width={50}
-              height={50}
-              src={hero}
-              alt="hero"
-            />
+            <Link to="/" className="flex gap-x-2 items-center">
+              <img width={50} height={50} src={hero} alt="hero" />
+            </Link>
             <a className=" text-xl text-purple-600 font-bold">HERO.IO</a>
           </div>
         </div>

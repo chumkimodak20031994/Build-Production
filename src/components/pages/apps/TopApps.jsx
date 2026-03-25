@@ -42,7 +42,7 @@ const TopApps = ({ apps }) => {
       <div className="text-center mt-8">
         <button
           onClick={() => navigate("/apps")}
-          className="btn bg-purple-600 px-4 text-white text-l"
+          className="btn bg-purple-500 px-4 text-white text-l"
         >
           Show All
         </button>
