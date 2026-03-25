@@ -5,7 +5,7 @@ import Footer from "../pages/Footer";
 
 const Root = () => {
   return (
-    <div>
+    <div className="bg-gray-100">
       <Navbar />
       <main className="min-h-screen py-10">
         <Outlet />

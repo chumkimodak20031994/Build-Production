@@ -6,14 +6,7 @@ import { useNavigate } from "react-router";
 const TopApps = ({ apps }) => {
   const navigate = useNavigate();
   return (
-    <div className="max-w-6xl mx-auto px-4 my-10">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold">Trending Apps</h2>
-        <p className="text-gray-500 text-sm">
-          Explore All Trending Apps on the Market developed by us
-        </p>
-      </div>
-
+    <div className="max-w-7xl mx-auto px-4 my-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {apps.slice(0, 8).map((app) => (
           <div
@@ -49,7 +42,7 @@ const TopApps = ({ apps }) => {
       <div className="text-center mt-8">
         <button
           onClick={() => navigate("/apps")}
-          className="bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700"
+          className="btn bg-purple-600 px-4 text-white text-l"
         >
           Show All
         </button>

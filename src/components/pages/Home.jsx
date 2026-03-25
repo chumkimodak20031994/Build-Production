@@ -16,11 +16,11 @@ const Home = () => {
 
         setTimeout(() => {
           setLoading(false);
-        }, 2000);
+        }, 1000);
       });
   }, []);
   return (
-    <div>
+    <div className="max-w-7xl mx-auto px-4 my-10">
       <Banner />
 
       <div className="relative z-10">
@@ -30,10 +30,16 @@ const Home = () => {
         />
 
         <StatsSection />
+        <div className="text-center my-8">
+          <h2 className="text-2xl font-bold">Trending Apps</h2>
+          <p className="text-gray-500 text-sm">
+            Explore All Trending Apps on the Market developed by us
+          </p>
+        </div>
 
         {loading ? (
           <div className="flex justify-center items-center my-10">
-            <span className="loading loading-spinner loading-lg text-purple-600"></span>
+            <span className="loading loading-spinner loading-lg text-purple-600 rounded-full animate-spin"></span>
           </div>
         ) : (
           <TopApps apps={apps} />
